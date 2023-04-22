@@ -4,6 +4,15 @@
 # this file to always be loaded, without a need to explicitly require it in any
 # files.
 #
+def disc_feat_spec
+  @merchant1 = Merchant.create!(name: 'Montana')
+  @discount1 = @merchant1.discounts.create!(percent: 10, threshold: 6)
+  @discount2 = @merchant1.discounts.create!(percent: 20, threshold: 12)
+  @discount3 = @merchant1.discounts.create!(percent: 30, threshold: 50)
+
+  @merchant2 = Merchant.create!(name: 'Iron Lak')
+  @discount4 = @merchant2.discounts.create!(percent: 15, threshold: 10)
+end
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file
 # will add to the boot time of your test suite on EVERY test run, even for an
