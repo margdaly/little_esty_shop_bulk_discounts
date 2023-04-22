@@ -1,12 +1,15 @@
 class DiscountsController < ApplicationController
   before_action :find_discount_and_merchant, only: [:show]
-  before_action :find_merchant, only: [:index]
+  before_action :find_merchant, only: [:new, :index]
 
   def index
     @discounts = @merchant.discounts
   end
 
   def show
+  end
+
+  def new
   end
 
   private
