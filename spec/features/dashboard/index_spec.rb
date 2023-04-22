@@ -47,6 +47,14 @@ RSpec.describe 'merchant dashboard' do
     expect(page).to have_content(@merchant1.name)
   end
 
+  it 'can see a link to my merchant discounts index' do
+    expect(page).to have_link("Bulk Discounts")
+
+    click_link "Bulk Discounts"
+
+    expect(current_path).to eq("/merchant/#{@merchant1.id}/discounts")
+  end
+
   it 'can see a link to my merchant items index' do
     expect(page).to have_link("Items")
 

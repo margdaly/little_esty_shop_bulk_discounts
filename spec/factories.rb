@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :bulk_discount do
-    discount { 1.5 }
-    quantity { 1 }
+  factory :discount do
+    percent { 1.5 }
+    threshold { 1 }
     merchant { nil }
   end
 
@@ -20,6 +20,7 @@ FactoryBot.define do
     name {Faker::Space.galaxy}
     invoices
     items
+    bulk_discount
   end
 
   factory :item do
