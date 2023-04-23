@@ -10,7 +10,7 @@ describe "merchant discounts index" do
     it "displays all the discounts id's, percent discount, and quantity threshold" do
       expect(page).to have_content(@merchant1.name)
       expect(page).to_not have_content(@merchant2.name)
-      expect(page).to_not have_content(@discount4.id)
+      expect(page).to_not have_content("Discount ##{@discount4.id}")
 
       within "#discount-#{@discount1.id}" do 
         expect(page).to have_content("Discount ##{@discount1.id}")
@@ -56,6 +56,13 @@ describe "merchant discounts index" do
     describe 'link to create a new discount' do
       it 'has link to new page to create a new discount' do
         expect(page).to have_link("Create New Discount")
+        click_link("Create New Discount")
+        expect(current_path).to eq(new_merchant_discount_path(@merchant1))
+
+        visit merchant_discounts_path(@merchant2)
+        expect(page).to have_link("Create New Discount")
+        click_link("Create New Discount")
+        expect(current_path).to eq(new_merchant_discount_path(@merchant2))
       end
     end
   end
