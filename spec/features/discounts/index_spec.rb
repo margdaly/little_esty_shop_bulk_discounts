@@ -53,8 +53,8 @@ describe "merchant discounts index" do
       end
     end
 
-    describe 'link to create a new discount' do
-      it 'has link to new page to create a new discount' do
+    describe "link to create a new discount" do
+      it "has link to new page to create a new discount" do
         expect(page).to have_link("Create New Discount")
         click_link("Create New Discount")
         expect(current_path).to eq(new_merchant_discount_path(@merchant1))

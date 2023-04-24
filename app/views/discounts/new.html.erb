@@ -1,1 +1,16 @@
 <%= render "shared/menu" %>
+
+<body>
+  <div class="row">
+    <p class='col-12'>My New Bulk Discount</p>
+  </div>
+
+  <%= form_with url: merchant_discounts_path(@merchant), model: @discount, local: true do |f| %>
+    <%= f.label :percent, "Percent Off?"%>
+    <%= f.number_field :percent, in: 1..99 %>
+    <%= f.label :threshold, "Quantity Threshold?"%>
+    <%= f.number_field :threshold, in: 1..99 %>
+    <%= f.submit "Create New Bulk Discount" %>
+  <% end %>
+
+</body>
