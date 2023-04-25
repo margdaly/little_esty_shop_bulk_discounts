@@ -7,13 +7,17 @@
 
   <p><%= link_to "Create New Discount", new_merchant_discount_path(@merchant) %></p>
 
-  <ul>
+  <ul class='ml-auto col-sm-4'>
     <% @discounts.each do |discount| %>
-      <div id="discount-<%= discount.id %>">
-        <ul><%= link_to "Discount ##{discount.id}", merchant_discount_path(@merchant, discount) %>
-          <li><%= discount.percent.to_i %>% Off </li>
-          <li>Quantity of <%= discount.threshold %> or more</li>
-        </ul>
+      <div class="row">
+        <div id="discount-<%= discount.id %>">
+          <ul><%= link_to "Discount ##{discount.id}", merchant_discount_path(@merchant, discount) %>
+            <li><%= button_to 'Delete', merchant_discount_path(@merchant, discount), method: :delete, local: true %>
+            <%= link_to 'Edit'%>
+            <li><%= discount.percent.to_i %>% Off </li>
+            <li>Quantity of <%= discount.threshold %> or more</li>
+          </ul>
+        </div>
       </div>
       <br>
     <% end %>
