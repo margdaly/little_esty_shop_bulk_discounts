@@ -12,6 +12,7 @@ def disc_feat_spec
 
   @merchant2 = Merchant.create!(name: 'Iron Lak')
   @discount4 = @merchant2.discounts.create!(percent: 15, threshold: 10)
+  @discount5 = @merchant2.discounts.create!(percent: 25, threshold: 25)
 end
 # Given that it is always loaded, you are encouraged to keep this file as
 # light-weight as possible. Requiring heavyweight dependencies from this file
