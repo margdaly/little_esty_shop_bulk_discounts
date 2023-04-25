@@ -1,5 +1,5 @@
 class DiscountsController < ApplicationController
-  before_action :find_discount_and_merchant, only: [:show, :destroy, :edit]
+  before_action :find_discount_and_merchant, only: [:show, :destroy, :edit, :update]
   before_action :find_merchant, only: [:new, :index, :create]
 
   def index
@@ -12,6 +12,12 @@ class DiscountsController < ApplicationController
   def edit
   end
   
+  def update
+    @discount.update(discount_params)
+    flash.notice = "Discount Updated! Nice!"
+    redirect_to merchant_discount_path(@merchant, @discount)
+  end
+
   def new
   end
 
@@ -34,6 +40,10 @@ class DiscountsController < ApplicationController
   end
 
   private
+  def discount_params
+    params.require(:discount).permit(:percent, :threshold)
+  end
+
   def find_discount_and_merchant
     @discount = Discount.find(params[:id])
     @merchant = Merchant.find(params[:merchant_id])
