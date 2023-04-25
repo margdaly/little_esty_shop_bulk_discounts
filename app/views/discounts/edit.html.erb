@@ -1,0 +1,16 @@
+<%= render "shared/menu" %>
+
+<body>
+  <div class="row">
+    <p class='col-12'>Edit Discount #<%= @discount.id %></p>
+  </div>
+
+  <%= form_with model: @discount, method: :patch, url: merchant_discount_path(@merchant, @discount), local: true do |f| %>
+    <%= f.label :percent, "Percent" %>
+    <%= f.number_field :percent, in: 1..99 %>
+    <%= f.label :threshold, "Threshold" %>
+    <%= f.number_field :threshold, in: 1..99 %>
+    <%= f.submit "Update #{@discount.id}" %>
+  <% end %>
+
+</body>

@@ -7,5 +7,5 @@
 
   <p>Quantity Threshold: <b><%= @discount.threshold %></b></p>
   <p>Percentage Discount: <b><%= @discount.percent %>%</b></p>
-  <p></p>
+  <p><%= link_to "Edit #{@discount.id}", edit_merchant_discount_path(@merchant, @discount), class: 'link_1', style: 'pull-right' %></p>
 </body>
