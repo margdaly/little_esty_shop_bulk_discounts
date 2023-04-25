@@ -1,5 +1,5 @@
 class DiscountsController < ApplicationController
-  before_action :find_discount_and_merchant, only: [:show]
+  before_action :find_discount_and_merchant, only: [:show, :destroy]
   before_action :find_merchant, only: [:new, :index, :create]
 
   def index
@@ -23,6 +23,11 @@ class DiscountsController < ApplicationController
       flash.notice = "That's Not Quite Right! Try Again, if you wish!"
       redirect_to new_merchant_discount_path(@merchant)
     end
+  end
+
+  def destroy
+    @discount.destroy
+    redirect_to merchant_discounts_path(@merchant)
   end
 
   private

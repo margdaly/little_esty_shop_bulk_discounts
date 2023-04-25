@@ -65,5 +65,31 @@ describe "merchant discounts index" do
         expect(current_path).to eq(new_merchant_discount_path(@merchant2))
       end
     end
+
+    describe "button to delete bulk discount" do
+      it "has button next to each discount to delete when clicked and redirect to index page" do
+        within "#discount-#{@discount1.id}" do 
+          expect(page).to have_button("Delete")
+          click_on("Delete")
+          expect(current_path).to eq(merchant_discounts_path(@merchant1))
+        end
+        expect(page).to_not have_content(@discount1.id)
+
+        visit merchant_discounts_path(@merchant1)
+        within "#discount-#{@discount2.id}" do 
+          expect(page).to have_button("Delete")
+          click_on("Delete")
+          expect(current_path).to eq(merchant_discounts_path(@merchant1))
+        end
+        expect(page).to_not have_content(@discount2.id)
+        visit merchant_discounts_path(@merchant1)
+        within "#discount-#{@discount3.id}" do 
+          expect(page).to have_button("Delete")
+          click_on("Delete")
+          expect(current_path).to eq(merchant_discounts_path(@merchant1))
+        end
+        expect(page).to_not have_content(@discount3.id)
+      end
+    end
   end
 end
