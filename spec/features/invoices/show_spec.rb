@@ -100,11 +100,24 @@ RSpec.describe 'invoices show' do
 
   describe "total and discounted revenue for merchant" do
     it "displays total revenue for merchant from this invoice (not including discounts)" do
-      visit merchant_invoice_path(@merchant1, @invoice_1)
-
+      @merchant9 = Merchant.create!(name: 'Iron Lak')
+      @item_33 = Item.create!(name: "Blue", description: "Paint", unit_price: 100, merchant_id: @merchant9.id)
+      @item_34 = Item.create!(name: "Red", description: "Paint", unit_price: 500, merchant_id: @merchant9.id)
+      @customer_90 = Customer.create!(first_name: 'Array', last_name: 'Hash')
+      @invoice_99 = Invoice.create!(customer_id: @customer_90.id, status: 2)
+      @ii_98 = InvoiceItem.create!(invoice_id: @invoice_99.id, item_id: @item_33.id, quantity: 10, unit_price: 10, status: 2)
+      @ii_99 = InvoiceItem.create!(invoice_id: @invoice_99.id, item_id: @item_34.id, quantity: 5, unit_price: 10, status: 2)
+      @discount1 = @merchant9.discounts.create!(percent: 50, threshold: 5)
+      @discount2 = @merchant9.discounts.create!(percent: 25, threshold: 10) 
+      
+      visit merchant_invoice_path(@merchant9, @invoice_99)
       within("#totals-and-discounts") do
-        expect(page).to have_content("Total Revenue with Bulk Discounts: 1")
+        expect(page).to have_content("Total Revenue: 150")
+        expect(page).to have_content("Total Revenue with Bulk Discounts: 75")
       end
+
+      @discount3 = @merchant1.discounts.create!(percent: 1, threshold: 500)
+      visit merchant_invoice_path(@merchant1, @invoice_1)
     end
   end
 end
