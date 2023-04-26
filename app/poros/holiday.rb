@@ -10,4 +10,8 @@ class Holiday
     @holiday_2 = @data[1]
     @holiday_3 = @data[2]
   end
+
+  def holi_date
+    
+  end
 end
