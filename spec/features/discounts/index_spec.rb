@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "merchant discounts index" do
+RSpec.describe "merchant discounts index" do
   before :each do 
     disc_feat_spec
     visit merchant_discounts_path(@merchant1)
