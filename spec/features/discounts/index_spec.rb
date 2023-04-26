@@ -92,4 +92,15 @@ RSpec.describe "merchant discounts index" do
       end
     end
   end
+
+  describe "Holiday api" do
+    it "has section with header of upcoming holidays with name and date of 3 upcoming US holidays" do
+      within "#upcoming-holidays" do
+        expect(page).to have_content("Upcoming Holidays")
+        expect(page).to have_content("Memorial Day ~ 2023-05-29")
+        expect(page).to have_content("Juneteenth ~ 2023-06-19")
+        expect(page).to have_content("Independence Day ~ 2023-07-04")
+      end
+    end
+  end
 end
