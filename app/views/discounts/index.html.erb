@@ -21,4 +21,11 @@
       <br>
     <% end %>
   </ul>
+
+  <section id="upcoming-holidays">
+    <h3>Upcoming Holidays</h3>
+    <li><%= @holidays.holiday_1[:name] %> ~ <%= @holidays.holiday_1[:date] %></li>
+    <li><%= @holidays.holiday_2[:name] %> ~ <%= @holidays.holiday_2[:date] %></li>
+    <li><%= @holidays.holiday_3[:name] %> ~ <%= @holidays.holiday_3[:date] %></li>
+  </section>
 </body>

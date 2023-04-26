@@ -4,6 +4,7 @@ class DiscountsController < ApplicationController
 
   def index
     @discounts = @merchant.discounts
+    @holidays = HolidayBuilder.next_3_holidays
   end
 
   def show
