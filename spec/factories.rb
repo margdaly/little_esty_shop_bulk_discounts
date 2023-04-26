@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :discount do
-    percent { 1.5 }
-    threshold { 1 }
+    percent {Faker::Number.decimal(l_digits: 2)}
+    threshold {Faker::Number.decimal(l_digits: 2)}
     merchant { nil }
   end
 
