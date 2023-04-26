@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "merchant invoices index" do
+RSpec.describe "merchant invoices index" do
   before :each do
     @merchant1 = Merchant.create!(name: 'Hair Care')
     @merchant2 = Merchant.create!(name: 'Jewelry')
@@ -81,5 +81,4 @@ describe "merchant invoices index" do
 
     expect(current_path).to eq(merchant_invoice_path(@merchant1, @invoice_1))
   end
-
 end

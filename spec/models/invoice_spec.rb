@@ -12,7 +12,7 @@ RSpec.describe Invoice, type: :model do
     it { should have_many :transactions}
   end
   describe "instance methods" do
-    it "total_revenue" do
+    before :each do
       @merchant1 = Merchant.create!(name: 'Hair Care')
       @item_1 = Item.create!(name: "Shampoo", description: "This washes your hair", unit_price: 10, merchant_id: @merchant1.id, status: 1)
       @item_8 = Item.create!(name: "Butterfly Clip", description: "This holds up your hair but in a clip", unit_price: 5, merchant_id: @merchant1.id)
@@ -21,7 +21,24 @@ RSpec.describe Invoice, type: :model do
       @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 2)
       @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
 
+      @discount1 = @merchant1.discounts.create!(percent: 50, threshold: 5)
+      @discount2 = @merchant1.discounts.create!(percent: 25, threshold: 10)
+    end
+
+    it "total_revenue" do
       expect(@invoice_1.total_revenue).to eq(100)
+    end
+
+    describe "discounted_revenue" do
+      it "returns the amount saved from bulk discounts" do
+        expect(@invoice_1.discounted_revenue).to eq(45)
+      end
+    end
+
+    describe "total_revenue_with_discount" do
+      it "returns total with dicount included" do
+        expect(@invoice_1.total_revenue_with_discount).to eq(55)
+      end
     end
   end
 end
