@@ -11,6 +11,7 @@ RSpec.describe Invoice, type: :model do
     it { should have_many(:merchants).through(:items) }
     it { should have_many :transactions}
   end
+
   describe "instance methods" do
     before :each do
       @merchant1 = Merchant.create!(name: 'Hair Care')
@@ -21,23 +22,32 @@ RSpec.describe Invoice, type: :model do
       @ii_1 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 2)
       @ii_11 = InvoiceItem.create!(invoice_id: @invoice_1.id, item_id: @item_8.id, quantity: 1, unit_price: 10, status: 1)
 
+      @customer_14 = Customer.create!(first_name: 'Loey', last_name: 'Pmith')
+      @invoice_18 = Invoice.create!(customer_id: @customer_14.id, status: 2, created_at: "2012-03-27 14:54:09")
+
+      @ii_14 = InvoiceItem.create!(invoice_id: @invoice_18.id, item_id: @item_1.id, quantity: 40, unit_price: 10, status: 2)
+      @ii_114 = InvoiceItem.create!(invoice_id: @invoice_18.id, item_id: @item_8.id, quantity: 5, unit_price: 10, status: 1)
+
       @discount1 = @merchant1.discounts.create!(percent: 50, threshold: 5)
       @discount2 = @merchant1.discounts.create!(percent: 25, threshold: 10)
     end
 
     it "total_revenue" do
       expect(@invoice_1.total_revenue).to eq(100)
+      expect(@invoice_18.total_revenue).to eq(450)
     end
 
     describe "discounted_revenue" do
       it "returns the amount saved from bulk discounts" do
         expect(@invoice_1.discounted_revenue).to eq(45)
+        expect(@invoice_18.discounted_revenue).to eq(225)
       end
     end
 
     describe "total_revenue_with_discount" do
-      it "returns total with dicount included" do
+      it "returns total with discount included" do
         expect(@invoice_1.total_revenue_with_discount).to eq(55)
+        expect(@invoice_18.total_revenue_with_discount).to eq(225)
       end
     end
   end
